@@ -1,0 +1,18 @@
+[tool.poetry]
+name = ""
+version = ""
+description = ""
+authors = [""]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"discord.py" = "^1.7.3"
+Flask = "^2.1.2"
+youtube_dl = "^2021.12.17"
+PyNaCl = "^1.5.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
