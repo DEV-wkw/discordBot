@@ -1,8 +1,8 @@
 [tool.poetry]
-name = ""
-version = ""
-description = ""
-authors = [""]
+name = "discordBot"
+version = "0"
+description = "discordBot"
+authors = ["discordBot"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
