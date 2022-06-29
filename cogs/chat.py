@@ -5,7 +5,7 @@ class chat(commands.Cog):
     
   @commands.command()
   async def clear(self, ctx):
-    await ctx.channel.purge(limit = 20)
+    await ctx.channel.purge(limit = 20, check = lambda x: not x.embeds)
     await ctx.send('```20 messages has been deleted.```', delete_after=3)
 
   @commands.command()
