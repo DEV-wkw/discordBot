@@ -31,6 +31,9 @@ class music(commands.Cog):
         await music.react(ctx = reaction)
         ctx = await commands.Bot.get_context(self = self.bot, message = reaction)
         ctx.voice_client.stop()
+      elif payload.emoji.name == '❎':
+        message = await channel.fetch_message(payload.message_id)
+        await message.delete()
 
   @commands.command()
   async def add(self, ctx, input_url):
@@ -68,6 +71,7 @@ class music(commands.Cog):
     await ctx.clear_reactions()
     await ctx.add_reaction('▶️')
     await ctx.add_reaction('⏸️')
+    await ctx.add_reaction('❎')
         
 def setup(c):
   c.add_cog(music(c))
