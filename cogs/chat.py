@@ -4,7 +4,7 @@ from discord.ext import commands
 class chat(commands.Cog):
 
   def __init__(self, bot = None):
-  self.bot = bot
+    self.bot = bot
 
   @commands.command()
   async def clear(self, ctx):
