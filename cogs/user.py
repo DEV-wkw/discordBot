@@ -11,6 +11,8 @@ class User(Enum):
   avatar_url = 2
   xp = 3
   xp_time = 4
+  item_name = 5
+  item_quantity = 6
     
 class user(commands.Cog):
   
@@ -27,7 +29,7 @@ class user(commands.Cog):
           else:
             xpBar += '⬜'
         embed = discord.Embed(
-          description = xpBar + '\n```XP: ' + str(db[key][User.xp.value]) + '```',
+          description = xpBar + '\n``` XP: ' + str(db[key][User.xp.value]) + '\nInv: ' + str(db[key][User.item_name.value]) + ' (x' + str(db[key][User.item_quantity.value]) + ')' + '```',
           color = discord.Colour.gold()
         )
         embed.set_author(name = db[key][User.name.value] + ' (Lv.' + str(int(db[key][User.xp.value]/50)) + ')')
@@ -45,10 +47,19 @@ class user(commands.Cog):
         f"{ctx.author.name}",
         f"{ctx.author.avatar_url}",
         0,
-        int(time.time())
+        int(time.time()),
+        "None",
+        0
       ]
       await ctx.send('```Welcome! New user ' + str(ctx.author.name) + '.```', delete_after=30)
       await user.info(self, ctx)
+    else:
+      for key in db.keys():
+        if(int(key) == int(ctx.author.id)):
+          userData = db[key]
+          if(len(userData) < 7):
+            for i in range(len(userData), 7):
+              db[key].append("")
 
   async def addXp(self, ctx, amount):
     for key in db.keys():

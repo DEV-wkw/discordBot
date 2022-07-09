@@ -14,8 +14,10 @@ async def on_message(message):
   if(int(message.author.id) != int(os.getenv('bot_id_token'))):
     ctx = await c.get_context(message)
     user = c.get_cog('user')
+    inventory = c.get_cog('inventory')
     await user.addNewUser(ctx)
     await user.addXp(ctx, 3)
+    await inventory.checkPaintbrush(ctx, message)
     await c.process_commands(message)
     
 for file in os.listdir('./cogs'):
