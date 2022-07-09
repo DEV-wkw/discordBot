@@ -13,8 +13,6 @@ class music(commands.Cog):
     if before.channel == None and after.channel != None:
       await member.voice.channel.connect()
       await member.guild.change_voice_state(channel = member.voice.channel, self_deaf = True)
-    elif before.channel != None and after.channel == None:
-      await member.guild.voice_client.disconnect()
   
   @commands.Cog.listener()
   async def on_raw_reaction_add(self, payload):
