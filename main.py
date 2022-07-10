@@ -8,6 +8,7 @@ c = commands.Bot(command_prefix = '')
 @c.event
 async def on_ready():
   print('program started')
+  await c.change_presence(activity = discord.Game(name = 'type "help" for info'))
 
 @c.event
 async def on_message(message):
@@ -19,6 +20,23 @@ async def on_message(message):
     await user.addXp(ctx, 3)
     await inventory.checkPaintbrush(ctx, message)
     await c.process_commands(message)
+
+c.remove_command("help")
+@c.command()
+async def help(ctx):
+  content = ''
+  content += ' info        - show user info\n'
+  content += 'clear        - clear latest 20 messages\n'
+  content += '  add (URL)  - add music\n'
+  content += ' rand        - play music randomly\n'
+  content += '  buy (item) - buy items\n'
+  content += 'store        - open store\n'
+  embed = discord.Embed(
+      description = '\n```' + content + '```',
+      color = discord.Colour.gold()
+    )
+  embed.set_author(name = 'Commands Available')
+  await ctx.send(embed = embed, delete_after=30)
     
 for file in os.listdir('./cogs'):
   if file.endswith('.py'):

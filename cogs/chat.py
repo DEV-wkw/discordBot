@@ -13,10 +13,5 @@ class chat(commands.Cog):
     user = self.bot.get_cog('database')
     await user.addXp(ctx, 3)
 
-  @commands.command()
-  async def hide(self, ctx, message):
-    await ctx.message.delete()
-    await ctx.send(message)
-      
 def setup(c):
   c.add_cog(chat(c))
