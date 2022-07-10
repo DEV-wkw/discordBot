@@ -18,21 +18,20 @@ class user(commands.Cog):
   
   @commands.command()
   async def info(self, ctx):
-    await ctx.message.delete()
     await user.addNewUser(self, ctx)
     for key in db.keys():
       if(int(key) == int(ctx.author.id)):
-        xpBar = ''
+        xpBar = ""
         for i in range(10):
           if((db[key][User.xp.value]%50)/5 >= i+1):
-            xpBar += '🟩'
+            xpBar += "🟩"
           else:
-            xpBar += '⬜'
+            xpBar += "⬜"
         embed = discord.Embed(
-          description = xpBar + '\n``` XP: ' + str(db[key][User.xp.value]) + '\nInv: ' + str(db[key][User.item_name.value]) + ' (x' + str(db[key][User.item_quantity.value]) + ')' + '```',
+          description = xpBar + "\n``` XP: " + str(db[key][User.xp.value]) + "\nInv: " + str(db[key][User.item_name.value]) + " (x" + str(db[key][User.item_quantity.value]) + ")" + "```",
           color = discord.Colour.gold()
         )
-        embed.set_author(name = db[key][User.name.value] + ' (Lv.' + str(int(db[key][User.xp.value]/50)) + ')')
+        embed.set_author(name = db[key][User.name.value] + " (Lv." + str(int(db[key][User.xp.value]/50)) + ")")
         embed.set_thumbnail(url = db[key][User.avatar_url.value])
         await ctx.send(embed = embed, delete_after=30)
           
@@ -51,7 +50,7 @@ class user(commands.Cog):
         "None",
         0
       ]
-      await ctx.send('```Welcome! New user ' + str(ctx.author.name) + '.```', delete_after=30)
+      await ctx.send("```Welcome! New user " + str(ctx.author.name) + ".```", delete_after=30)
       await user.info(self, ctx)
     else:
       for key in db.keys():
@@ -65,13 +64,13 @@ class user(commands.Cog):
     for key in db.keys():
       if(int(key) == int(ctx.author.id)):
         xpInterval = int(time.time()) - int(db[key][User.xp_time.value])
-        if(xpInterval > int(os.getenv('xp_time_token'))):
+        if(xpInterval > int(os.getenv("xp_time_token"))):
           levelBefore = int(db[key][User.xp.value]/50)
           db[key][User.xp.value] = int(db[key][User.xp.value]) + int(amount)
           db[key][User.xp_time.value] = int(time.time())
           levelAfter = int(db[key][User.xp.value]/50)
           if(levelBefore != levelAfter):
-            await ctx.send('```Congratulations! User ' + str(ctx.author.name) + ' level up to Lv.' + str(levelAfter) + '```', delete_after=30)
+            await ctx.send("```Congratulations! User " + str(ctx.author.name) + " level up to Lv." + str(levelAfter) + "```", delete_after=30)
             await user.info(self, ctx)
       
 def setup(c):
