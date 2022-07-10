@@ -28,7 +28,7 @@ class user(commands.Cog):
           else:
             xpBar += "⬜"
         embed = discord.Embed(
-          description = xpBar + "\n``` XP: " + str(db[key][User.xp.value]) + "\nInv: " + str(db[key][User.item_name.value]) + " (x" + str(db[key][User.item_quantity.value]) + ")" + "```",
+          description = xpBar + "\n`⭐ " + str(db[key][User.xp.value]) + "`\n`🎁 " + str(db[key][User.item_name.value]) + " (x" + str(db[key][User.item_quantity.value]) + ")`" + "",
           color = discord.Colour.gold()
         )
         embed.set_author(name = db[key][User.name.value] + " (Lv." + str(int(db[key][User.xp.value]/50)) + ")")

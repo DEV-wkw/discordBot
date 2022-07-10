@@ -25,12 +25,13 @@ class store(commands.Cog):
   async def store(self, ctx):
     content = ""
     for i in range(len(store.itemList)):
-      content += str(store.itemList[i][0]).rjust(18) + ": "
-      content += str(store.itemList[i][1]).rjust(3) + "XP(x"
+      content += str(store.itemList[i][0]).rjust(18) + ": ⭐"
+      content += str(store.itemList[i][1]).rjust(2) + " (x"
       content += str(store.itemList[i][2]).rjust(2,"0") + ")\n"
+      balance = "`Balance: " + str(db[str(ctx.author.id)][User.xp.value]);
     
     embed = discord.Embed(
-      description = "\n```" + content + "```",
+      description = balance + "`\n```" + content + "```",
       color = discord.Colour.gold()
     )
     embed.set_author(name = "XP Store")

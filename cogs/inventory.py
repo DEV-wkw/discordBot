@@ -37,12 +37,20 @@ class inventory(commands.Cog):
         else:
           return
 
+        if(message.embeds):
+          url = message.embeds[0].url
+          message.content = message.content.replace(url, "")
+          if(message.content == ""):
+            message.content = "sent a video "
+
         if(item_quantity > 0):
           db[key][User.item_quantity.value] -= 1
           await ctx.message.delete()
           displayMessage = "```" + color + str(message.author)
           displayMessage += ": " + str(message.content) + msgEnd + "```"
           await ctx.send(displayMessage)
+          if(message.embeds):
+            await ctx.send(url)
       
 def setup(c):
   c.add_cog(inventory(c))
